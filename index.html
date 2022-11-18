@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MÁQUINA DE MEMES</title>
+    <link rel="stylesheet" href="./styles/reset.css">
+    <link rel="stylesheet" href="./styles/style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="app" id="downlabled">
+        <div class="logo">
+        <img src="./images/logo DIO.webp" alt="">
+      </div>
+      <div class="app-image">
+        <textarea
+        name=""
+        class="img-caption"
+        aria-multiline="true"></textarea>
+        <div id="display-image"></div>
+        <textarea
+        name=""
+        class="img-caption"
+        aria-multiline="true"></textarea>
+      </div>
+      <div class="app-photo-picker">
+        <select id="meme-list" onchange="changeMemePicture(this.value)"></select>
+         <input type="file"
+         id="image-input"
+         accept="image/jpeg, image/png, image/jpg"/>
+
+      </div>
+        <button id="btn-download">Download</button>
+    
+      </div>
+    </div>
+  </div>
+  <script src="./javascript/scripts.js"></script>
+  <script src="./javascript/html2Canvas.js"></script>
+  <script>
+    
+    
+    document.getElementById("btn-download").onclick = () =>{
+      const screenshotPrint = document.querySelector("#downlabled")
+      html2canvas(screenshotPrint).then((canvas)=>{
+        const base64Image= canvas.toDataURL("image/png")
+        let anchor = document.createElement("a")
+        anchor.setAttribute("href", base64Image)
+        anchor.setAttribute("download", "my-meme.png")
+        anchor.click()
+        anchor.remove()
+
+      })
+    }
+  </script>
+
+  </body>
+</html>
